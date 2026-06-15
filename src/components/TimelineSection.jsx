@@ -5,7 +5,7 @@ import { containerVariants, itemVariants } from '../utils/animations';
 
 const TimelineSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -55,7 +55,7 @@ const TimelineSection = () => {
   ];
 
   return (
-    <section id="timeline" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="timeline" className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
         <div className="absolute top-1/4 right-0 w-[30rem] h-[30rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -63,7 +63,6 @@ const TimelineSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -79,7 +78,6 @@ const TimelineSection = () => {
           {/* Timeline items */}
           <motion.div
             className="space-y-12"
-            ref={ref}
             variants={containerVariants}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
@@ -139,7 +137,6 @@ const TimelineSection = () => {
           {/* End milestone */}
           <motion.div
             className="text-center mt-20"
-            ref={ref}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.8, delay: 0.4 }}

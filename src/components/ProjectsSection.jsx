@@ -6,7 +6,7 @@ import { FiGithub, FiExternalLink, FiX } from 'react-icons/fi';
 
 const ProjectsSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -87,7 +87,7 @@ const ProjectsSection = () => {
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <section id="projects" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="projects" className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
         <div className="absolute top-0 right-1/4 w-[35rem] h-[35rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -95,7 +95,6 @@ const ProjectsSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -106,7 +105,6 @@ const ProjectsSection = () => {
         {/* Category Filter */}
         <motion.div
           className="flex flex-wrap gap-2.5 justify-center mb-16 max-w-xl mx-auto p-1.5 rounded-xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-md"
-          ref={ref}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -129,7 +127,6 @@ const ProjectsSection = () => {
         {/* Projects Grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}

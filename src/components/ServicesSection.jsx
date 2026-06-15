@@ -7,7 +7,7 @@ import { FiCode, FiServer, FiMonitor, FiDatabase, FiLayout, FiLink } from 'react
 
 const ServicesSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -51,7 +51,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="services" className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
         <div className="absolute top-1/2 left-1/4 w-[35rem] h-[35rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -59,7 +59,6 @@ const ServicesSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -69,7 +68,6 @@ const ServicesSection = () => {
 
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -146,7 +144,6 @@ const ServicesSection = () => {
         {/* CTA Section */}
         <motion.div
           className="mt-24 glass p-16 rounded-2xl text-center border border-white/[0.05] relative overflow-hidden shadow-2xl"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, delay: 0.2 }}

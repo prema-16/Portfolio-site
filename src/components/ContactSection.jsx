@@ -6,7 +6,7 @@ import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
 
 const ContactSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -72,7 +72,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="relative py-20 px-4 overflow-hidden">
+    <section ref={ref} id="contact" className="relative py-20 px-4 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Background gradients */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-gradient-radial from-neon-blue/10 to-transparent rounded-full blur-3xl" />
@@ -80,7 +80,6 @@ const ContactSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
@@ -90,7 +89,6 @@ const ContactSection = () => {
 
         <motion.p
           className="text-center text-white/70 text-lg max-w-2xl mx-auto mb-12"
-          ref={ref}
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -102,7 +100,6 @@ const ContactSection = () => {
           {/* Contact Info */}
           <motion.div
             className="space-y-6"
-            ref={ref}
             variants={containerVariants}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
@@ -163,7 +160,6 @@ const ContactSection = () => {
 
           {/* Contact Form */}
           <motion.div
-            ref={ref}
             initial={{ opacity: 0, x: 50 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.6 }}

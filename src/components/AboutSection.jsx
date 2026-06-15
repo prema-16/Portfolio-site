@@ -5,7 +5,7 @@ import { containerVariants, itemVariants } from '../utils/animations';
 
 const AboutSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -17,7 +17,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="about" className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
         <div className="absolute top-1/2 right-0 w-[40rem] h-[40rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -25,7 +25,6 @@ const AboutSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -35,7 +34,6 @@ const AboutSection = () => {
 
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-16"
-          ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}

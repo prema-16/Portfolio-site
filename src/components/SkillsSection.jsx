@@ -6,7 +6,7 @@ import { FiCode, FiServer, FiDatabase, FiTool } from 'react-icons/fi';
 
 const SkillsSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.15,
     triggerOnce: true,
   });
 
@@ -58,7 +58,7 @@ const SkillsSection = () => {
   const IconComponent = activeSkills.icon;
 
   return (
-    <section id="skills" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="skills" className="relative py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
         <div className="absolute top-1/3 left-0 w-[30rem] h-[30rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
@@ -66,7 +66,6 @@ const SkillsSection = () => {
 
         <motion.h2
           className="section-title"
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -77,7 +76,6 @@ const SkillsSection = () => {
         {/* Category Buttons - Sleek Premium Tab Switcher */}
         <motion.div
           className="flex flex-wrap gap-3 justify-center mb-16 max-w-2xl mx-auto p-1.5 rounded-xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-md"
-          ref={ref}
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -101,7 +99,6 @@ const SkillsSection = () => {
         {/* Skills Grid - Bento Layout */}
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
-          ref={ref}
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -158,7 +155,6 @@ const SkillsSection = () => {
         {/* Skills Summary Grid */}
         <motion.div
           className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          ref={ref}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
           variants={containerVariants}

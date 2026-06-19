@@ -14,6 +14,7 @@ const Navbar = () => {
     { name: 'Skills', link: 'skills' },
     { name: 'Projects', link: 'projects' },
     { name: 'Services', link: 'services' },
+    { name: 'Timeline', link: 'timeline' },
     { name: 'Contact', link: 'contact' },
   ];
 
@@ -75,8 +76,9 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white text-2xl"
+            className="md:hidden text-white text-2xl p-2 -mr-2 rounded-lg hover:bg-white/5 transition-colors"
             whileTap={{ scale: 0.9 }}
+            aria-label="Toggle menu"
           >
             {isOpen ? <FiX /> : <FiMenu />}
           </motion.button>

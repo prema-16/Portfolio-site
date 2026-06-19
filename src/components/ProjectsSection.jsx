@@ -6,7 +6,7 @@ import { FiGithub, FiExternalLink, FiX } from 'react-icons/fi';
 
 const ProjectsSection = () => {
   const { ref, inView } = useInView({
-    threshold: 0.15,
+    threshold: 0.1,
     triggerOnce: true,
   });
 
@@ -24,6 +24,7 @@ const ProjectsSection = () => {
       github: 'https://github.com',
       live: 'https://example.com',
       details: 'Built a complete e-commerce solution with advanced features including product filtering, user authentication, order management, and admin dashboard.',
+      stats: 'Load Time: 0.8s | Conv: +24%',
     },
     {
       id: 2,
@@ -35,6 +36,7 @@ const ProjectsSection = () => {
       github: 'https://github.com/prema-16/Padmavati-Pharma',
       live: 'https://padmavatipharma.vercel.app/',
       details: 'Developed a comprehensive management system with real-time inventory tracking, sales analytics, and automated reports.',
+      stats: 'Uptime: 99.9% | Sync: Live',
     },
     {
       id: 3,
@@ -46,6 +48,7 @@ const ProjectsSection = () => {
       github: 'https://github.com',
       live: 'https://example.com',
       details: 'Implemented robust authentication with password hashing, JWT tokens, refresh token rotation, and multi-factor authentication support.',
+      stats: 'Auth Rate: <3ms | JWT/MFA',
     },
     {
       id: 4,
@@ -57,6 +60,7 @@ const ProjectsSection = () => {
       github: 'https://github.com',
       live: 'https://example.com',
       details: 'Created a modern task management app with features like drag-and-drop, categories, priorities, and cloud sync.',
+      stats: 'Framer FPS: 60 | Vite Build',
     },
     {
       id: 5,
@@ -68,6 +72,7 @@ const ProjectsSection = () => {
       github: 'https://github.com',
       live: 'https://example.com',
       details: 'Built weather app with real-time data, interactive maps, weather alerts, and beautiful UI animations.',
+      stats: 'API Delay: <100ms | Acc: 98%',
     },
     {
       id: 6,
@@ -79,6 +84,7 @@ const ProjectsSection = () => {
       github: 'https://github.com',
       live: 'https://example.com',
       details: 'Designed and developed a stunning portfolio featuring glassmorphism, animations, and modern UI patterns.',
+      stats: 'Lighthouse: 100/100 | UI: High',
     },
   ];
 
@@ -87,14 +93,14 @@ const ProjectsSection = () => {
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <section ref={ref} id="projects" className="relative py-32 px-4 overflow-hidden">
+    <section ref={ref} id="projects" className="relative py-16 sm:py-24 lg:py-32 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Background gradients */}
-        <div className="absolute top-0 right-1/4 w-[35rem] h-[35rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 left-0 w-[30rem] h-[30rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[20rem] sm:w-[35rem] h-[20rem] sm:h-[35rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 left-0 w-[20rem] sm:w-[30rem] h-[20rem] sm:h-[30rem] bg-gradient-radial from-accent/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
         <motion.h2
-          className="section-title"
+          className="section-title text-4xl sm:text-5xl md:text-7xl"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
@@ -102,9 +108,9 @@ const ProjectsSection = () => {
           Featured Projects
         </motion.h2>
 
-        {/* Category Filter */}
+        {/* Category Filter - scrollable on mobile */}
         <motion.div
-          className="flex flex-wrap gap-2.5 justify-center mb-16 max-w-xl mx-auto p-1.5 rounded-xl bg-white/[0.02] border border-white/[0.05] backdrop-blur-md"
+          className="flex gap-2 justify-start sm:justify-center mb-10 sm:mb-16 overflow-x-auto pb-2 sm:pb-0 sm:max-w-xl sm:mx-auto sm:p-1.5 sm:rounded-xl sm:bg-white/[0.02] sm:border sm:border-white/[0.05] sm:backdrop-blur-md no-scrollbar"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -113,11 +119,11 @@ const ProjectsSection = () => {
             <motion.button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`flex-1 min-w-[100px] px-5 py-2.5 rounded-lg text-sm font-semibold transition-all capitalize ${activeCategory === cat
+              className={`flex-shrink-0 px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all capitalize ${activeCategory === cat
                 ? 'bg-accent text-white shadow-[0_0_20px_rgba(255,107,0,0.3)]'
-                : 'text-white/60 hover:text-white hover:bg-white/[0.03]'
+                : 'text-white/60 hover:text-white hover:bg-white/[0.05] border border-white/[0.08]'
                 }`}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.97 }}
             >
               {cat}
             </motion.button>
@@ -126,7 +132,7 @@ const ProjectsSection = () => {
 
         {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
@@ -145,13 +151,11 @@ const ProjectsSection = () => {
               >
                 <motion.div
                   className="glass flex flex-col h-full overflow-hidden rounded-2xl border border-white/[0.05] hover:border-accent/30 transition-all duration-300 shadow-xl"
-                  whileHover={{ y: -8 }}
+                  whileHover={{ y: -6 }}
                 >
                   {/* Project Image */}
-                  <div className="w-full h-52 bg-gradient-to-br from-[#161616] to-[#0A0A0A] border-b border-white/5 flex items-center justify-center text-7xl overflow-hidden relative group-hover:from-accent/5 group-hover:to-black transition-colors duration-300">
-                    {/* Subtle grid mesh overlay */}
+                  <div className="w-full h-40 sm:h-52 bg-gradient-to-br from-[#161616] to-[#0A0A0A] border-b border-white/5 flex items-center justify-center text-5xl sm:text-7xl overflow-hidden relative group-hover:from-accent/5 group-hover:to-black transition-colors duration-300">
                     <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
-
                     <motion.div
                       className="transition-transform duration-500 group-hover:scale-125 filter drop-shadow-[0_10px_20px_rgba(255,107,0,0.2)]"
                       animate={{ y: [0, -6, 0] }}
@@ -162,34 +166,27 @@ const ProjectsSection = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">
+                      <h3 className="text-base sm:text-xl font-bold text-white mb-1.5 sm:mb-2 group-hover:text-accent transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <p className="text-white/60 text-sm mb-4 leading-relaxed font-light">{project.description}</p>
+                      <p className="text-white/60 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed font-light">{project.description}</p>
                     </div>
 
                     <div>
                       {/* Project Stats */}
-                      <div className="flex items-center gap-1.5 text-[0.65rem] font-mono text-white/40 mb-4 tracking-widest uppercase border-t border-b border-white/5 py-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                        <span>
-                          {project.id === 1 && "Load Time: 0.8s | Conv: +24%"}
-                          {project.id === 2 && "Uptime: 99.9% | Sync: Live"}
-                          {project.id === 3 && "Auth Rate: <3ms | JWT/MFA"}
-                          {project.id === 4 && "Framer FPS: 60 | Vite Build"}
-                          {project.id === 5 && "API Delay: <100ms | Acc: 98%"}
-                          {project.id === 6 && "Lighthouse: 100/100 | UI: High"}
-                        </span>
+                      <div className="flex items-center gap-1.5 text-[0.6rem] font-mono text-white/40 mb-3 sm:mb-4 tracking-widest uppercase border-t border-b border-white/5 py-1.5 sm:py-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse flex-shrink-0" />
+                        <span className="truncate">{project.stats}</span>
                       </div>
 
                       {/* Tech Stack */}
-                      <div className="flex flex-wrap gap-1.5 mb-5">
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-5">
                         {project.tech.map((tech, index) => (
                           <span
                             key={index}
-                            className="text-[0.65rem] font-mono px-2.5 py-1 rounded bg-white/[0.03] text-white/80 border border-white/[0.05]"
+                            className="text-[0.6rem] font-mono px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-white/[0.03] text-white/80 border border-white/[0.05]"
                           >
                             {tech}
                           </span>
@@ -197,27 +194,27 @@ const ProjectsSection = () => {
                       </div>
 
                       {/* Links */}
-                      <div className="grid grid-cols-2 gap-3" onClick={(e) => e.stopPropagation()}>
+                      <div className="grid grid-cols-2 gap-2 sm:gap-3" onClick={(e) => e.stopPropagation()}>
                         <motion.a
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-white/20 transition-all text-xs font-semibold"
+                          className="flex items-center justify-center gap-1.5 px-2 sm:px-3 py-2 rounded-lg border border-white/10 text-white/70 hover:text-white hover:border-white/20 transition-all text-xs font-semibold"
                           whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
+                          whileTap={{ scale: 0.97 }}
                         >
-                          <FiGithub size={14} />
+                          <FiGithub size={13} />
                           <span>GitHub</span>
                         </motion.a>
                         <motion.a
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-accent text-white hover:shadow-[0_0_15px_rgba(255,107,0,0.3)] transition-all text-xs font-semibold"
+                          className="flex items-center justify-center gap-1.5 px-2 sm:px-3 py-2 rounded-lg bg-accent text-white hover:shadow-[0_0_15px_rgba(255,107,0,0.3)] transition-all text-xs font-semibold"
                           whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
+                          whileTap={{ scale: 0.97 }}
                         >
-                          <FiExternalLink size={14} />
+                          <FiExternalLink size={13} />
                           <span>Live Demo</span>
                         </motion.a>
                       </div>
@@ -233,34 +230,38 @@ const ProjectsSection = () => {
         <AnimatePresence>
           {selectedProject && (
             <motion.div
-              className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50 p-4"
+              className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-end sm:items-center justify-center z-50 p-0 sm:p-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
             >
               <motion.div
-                className="glass rounded-2xl max-w-xl w-full p-8 overflow-y-auto border border-white/[0.08] shadow-2xl relative"
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.95, opacity: 0 }}
+                className="glass rounded-t-3xl sm:rounded-2xl max-w-xl w-full p-6 sm:p-8 overflow-y-auto max-h-[85vh] sm:max-h-[90vh] border border-white/[0.08] shadow-2xl relative"
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: '100%', opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex justify-between items-start mb-6">
+                {/* Mobile drag indicator */}
+                <div className="w-10 h-1 bg-white/20 rounded-full mx-auto mb-4 sm:hidden" />
+
+                <div className="flex justify-between items-start mb-5 sm:mb-6">
                   <div>
-                    <h3 className="text-3xl font-extrabold text-white mb-2 tracking-tight">{selectedProject.title}</h3>
-                    <div className="w-12 h-1 bg-accent rounded" />
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">{selectedProject.title}</h3>
+                    <div className="w-10 h-1 bg-accent rounded" />
                   </div>
                   <motion.button
                     onClick={() => setSelectedProject(null)}
-                    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                    className="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-colors"
                     whileHover={{ scale: 1.05 }}
                   >
                     <FiX size={18} />
                   </motion.button>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-5 sm:space-y-6">
                   <p className="text-white/70 leading-relaxed font-light text-sm">{selectedProject.details}</p>
 
                   <div>
@@ -277,12 +278,12 @@ const ProjectsSection = () => {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 pt-4 border-t border-white/5">
+                  <div className="flex gap-3 sm:gap-4 pt-4 border-t border-white/5">
                     <motion.a
                       href={selectedProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-secondary flex-1 flex items-center justify-center gap-2 text-sm"
+                      className="btn-secondary flex-1 flex items-center justify-center gap-2 text-sm py-3"
                       whileHover={{ scale: 1.02 }}
                     >
                       <FiGithub size={16} />
@@ -292,7 +293,7 @@ const ProjectsSection = () => {
                       href={selectedProject.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary flex-1 flex items-center justify-center gap-2 text-sm"
+                      className="btn-primary flex-1 flex items-center justify-center gap-2 text-sm py-3"
                       whileHover={{ scale: 1.02 }}
                     >
                       <FiExternalLink size={16} />

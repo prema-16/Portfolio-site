@@ -27,12 +27,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Preload fonts and resources
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    // Loading is now controlled entirely by LoadingScreen's onLoadingComplete callback
+    // No independent timer — site reveals only after animation finishes
   }, []);
 
   return (

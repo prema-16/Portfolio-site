@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Icosahedron, MeshDistortMaterial, Sphere, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -7,14 +7,30 @@ const AIAvatar = () => {
   const groupRef = useRef();
   const meshRef = useRef();
   const innerRef = useRef();
+  const { viewport, size } = useThree();
+
+  // Detect mobile: viewport width in world units shrinks on mobile
+  const isMobile = size.width < 768;
+
+  // On mobile: center the sphere and scale it down a bit
+  // On desktop: keep it on the right side like before
+  const posX = isMobile ? 0 : 3;
+  const posY = isMobile ? 0.5 : 0;
+  const posZ = isMobile ? 0 : -2;
+  const sphereScale = isMobile ? 0.85 : 1.2;
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    
-    // Smoothly follow pointer
+
+    // On mobile, no pointer tracking (touch doesn't have pointer coords)
     if (groupRef.current) {
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, (state.pointer.y * Math.PI) / 4, 0.05);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, (state.pointer.x * Math.PI) / 4, 0.05);
+      if (!isMobile) {
+        groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, (state.pointer.y * Math.PI) / 4, 0.05);
+        groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, (state.pointer.x * Math.PI) / 4, 0.05);
+      } else {
+        // Slow auto-rotation on mobile
+        groupRef.current.rotation.y = time * 0.3;
+      }
     }
 
     if (meshRef.current) {
@@ -30,13 +46,12 @@ const AIAvatar = () => {
   return (
     <group ref={groupRef}>
       <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-        {/* Positioned towards the right side to balance Hero section */}
-        <group position={[3, 0, -2]}>
-          <Icosahedron ref={meshRef} args={[1.5, 1]} scale={1.2}>
+        <group position={[posX, posY, posZ]}>
+          <Icosahedron ref={meshRef} args={[1.5, 1]} scale={sphereScale}>
             <meshBasicMaterial color="#FF6B00" wireframe transparent opacity={0.6} />
           </Icosahedron>
 
-          <Sphere ref={innerRef} args={[1.2, 32, 32]}>
+          <Sphere ref={innerRef} args={[1.2, 32, 32]} scale={sphereScale}>
             <MeshDistortMaterial
               color="#111111"
               attach="material"
@@ -50,7 +65,7 @@ const AIAvatar = () => {
               opacity={0.95}
             />
           </Sphere>
-          
+
           <pointLight color="#FF6B00" intensity={2.5} distance={10} />
         </group>
       </Float>

@@ -62,7 +62,8 @@
     }
 
     .section-title {
-        @apply text-5xl md:text-7xl font-extrabold tracking-tighter text-transparent bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-center mb-16;
+        @apply font-extrabold tracking-tighter text-transparent bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-center mb-10 sm:mb-16;
+        font-size: clamp(2rem, 8vw, 4.5rem);
     }
 
     .card-hover {
@@ -232,7 +233,6 @@
     animation: spin-slow 3s linear infinite;
 }
 
-/* Active Nav Spying Indicator */
 .active-nav {
     position: relative;
     font-weight: 500;
@@ -250,4 +250,33 @@
     background-color: #FF6B00;
     box-shadow: 0 0 10px #FF6B00, 0 0 5px #FF6B00;
     transition: all 0.3s ease;
+}
+
+/* Hide scrollbar for horizontal filter tabs on mobile */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Mobile-first touch improvements */
+@media (max-width: 768px) {
+    /* Ensure tap targets are at least 44px */
+    button, a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Prevent horizontal overflow on small screens */
+    section {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    /* Better font smoothing on mobile */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 }

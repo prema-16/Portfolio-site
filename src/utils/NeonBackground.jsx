@@ -13,13 +13,16 @@ const NeonBackground = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    const baseSize = Math.min(canvas.width, canvas.height);
+    const scale = baseSize / 800; // 800px is the reference desktop size
+
     const orbs = [
       {
         x: canvas.width * 0.2,
         y: canvas.height * 0.3,
         vx: 0.15,
         vy: 0.2,
-        radius: 350,
+        radius: 350 * Math.max(scale, 0.5),
         color: '#FF6B00',
         opacity: 0.06,
       },
@@ -28,7 +31,7 @@ const NeonBackground = () => {
         y: canvas.height * 0.5,
         vx: -0.1,
         vy: 0.25,
-        radius: 400,
+        radius: 400 * Math.max(scale, 0.5),
         color: '#222222',
         opacity: 0.08,
       },
@@ -37,7 +40,7 @@ const NeonBackground = () => {
         y: canvas.height * 0.8,
         vx: 0.2,
         vy: -0.15,
-        radius: 450,
+        radius: 450 * Math.max(scale, 0.5),
         color: '#FF3C00',
         opacity: 0.04,
       },
@@ -46,7 +49,7 @@ const NeonBackground = () => {
         y: canvas.height * 0.6,
         vx: -0.15,
         vy: -0.1,
-        radius: 300,
+        radius: 300 * Math.max(scale, 0.5),
         color: '#111111',
         opacity: 0.1,
       },
